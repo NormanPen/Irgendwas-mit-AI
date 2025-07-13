@@ -1,0 +1,9 @@
+{
+  "name": "Fullstack DevContainer",
+  "dockerComposeFile": ".devcontainer/docker-compose.yml",
+  "service": "dev",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [8000, 3000, 5432],
+  "postCreateCommand": "echo 'DevContainer ready.'",
+  "remoteUser": "root"
+}

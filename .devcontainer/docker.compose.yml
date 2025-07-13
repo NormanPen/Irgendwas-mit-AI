@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  dev:
+    build:
+      context: ..
+      dockerfile: .devcontainer/dev.Dockerfile
+    volumes:
+      - ..:/workspace
+    working_dir: /workspace
+    command: sleep infinity
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"   # FastAPI
+      - "3000:3000"   # React/Vite
+    networks:
+      - dev
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: devuser
+      POSTGRES_PASSWORD: devpass
+      POSTGRES_DB: devdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - dev
+
+volumes:
+  pgdata:
+
+networks:
+  dev:
